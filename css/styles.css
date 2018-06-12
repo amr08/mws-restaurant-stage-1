@@ -39,6 +39,7 @@ button {
   color: orange;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 20px;
 }
 
 button:hover {
@@ -200,6 +201,13 @@ nav h1 a {
   padding: 0 10px;
   width: 200px;
 }
+
+.filter-options select:focus {
+  outline: 0;
+  box-shadow: 0 0 8px 3px hotpink;
+}
+
+
 
 /* ====================== Restaurant Listing ====================== */
 #restaurants-list {
