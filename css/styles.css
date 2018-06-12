@@ -33,6 +33,18 @@ a {
   text-decoration: none;
 }
 
+button {
+  margin-top: 20px;
+  padding: 10px;
+  color: orange;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  box-shadow: 0 1px 1px grey;
+}
+
 
 a:hover, 
 a:focus {
