@@ -36,7 +36,8 @@ a {
 button {
   margin-top: 20px;
   padding: 10px;
-  color: orange;
+  color: white;
+  background-color: #008080;
   border-radius: 5px;
   cursor: pointer;
   font-size: 20px;
@@ -95,7 +96,7 @@ section {
 
 
 #footer {
-  background-color: #444;
+  background-color: #252831;
   color: #aaa;
   font-size: 8pt;
   letter-spacing: 1px;
@@ -176,7 +177,7 @@ nav h1 a {
 /* ====================== Restaurant Filtering ====================== */
 .filter-options {
   display: flex;
-  background-color: #3397DB;
+  background-color: #2F4F4F;
   align-items: center;
 }
 
@@ -205,6 +206,11 @@ nav h1 a {
 .filter-options select:focus {
   outline: 0;
   box-shadow: 0 0 8px 3px hotpink;
+}
+
+.off-screen {
+  position: absolute;
+  left: -9999px;
 }
 
 
@@ -242,7 +248,7 @@ nav h1 a {
 
 
 #restaurants-list li h1 {
-  color: #f18200;
+  color: black;
   font-family: Arial,sans-serif;
   font-size: 14pt;
   font-weight: 200;
