@@ -1,4 +1,4 @@
-const STATIC_CACHE = 'mws-static-v4';
+const STATIC_CACHE = 'mws-static-v12';
 const cacheUrls =[
   '/',
   '/index.html',
@@ -21,19 +21,20 @@ self.addEventListener('install', event => {
 });
 
 
-// self.addEventListener('activate', event => {
-//   event.waitUntil(
-//     caches.keys()
-//       .then(cacheNames => (
-//         Promise.all(
-//           cacheNames.filter(cacheName => {
-//             return cacheName.startsWith('mws-') && !cacheUrls.includes(cacheName);
-//         }).map(cacheName => (
-//             caches['delete'](cacheName)
-//         )))
-//       ))
-//   )
-// });
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys().then(cacheNames => (
+      Promise.all(
+        cacheNames.filter(cacheName => (
+          cacheName.startsWith("mws-") &&
+           cacheName !== STATIC_CACHE
+        )).map(cacheName => (
+          caches.delete(cacheName)
+        ))
+      )
+    ))
+  );
+});
 
 
 self.addEventListener('fetch', event => {
@@ -60,7 +61,6 @@ self.addEventListener('fetch', event => {
 
 function serveRestaurantHtml(request) {
   var storageUrl = request.url.replace(/-\d+px\.jpg$/, '');
-  console.log(request)
 
   return caches.open(cacheUrls).then(cache => {
     return cache.match(storageUrl).then(response => {
