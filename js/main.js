@@ -3,6 +3,10 @@ let restaurants,
   cuisines;
 var map;
 var markers = [];
+var mykey = config.MY_API_KEY;
+var url = `https://maps.googleapis.com/maps/api/js?&libraries=places&key=${mykey}&callback=initMap`;
+document.getElementById("google-maps").src = url;
+
 
 /**
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
