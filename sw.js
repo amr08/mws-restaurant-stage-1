@@ -1,4 +1,4 @@
-const STATIC_CACHE = 'mws-static-v3';
+const STATIC_CACHE = 'mws-static-v4';
 const cacheUrls =[
   '/',
   '/index.html',
@@ -21,7 +21,35 @@ self.addEventListener('install', event => {
 });
 
 
+// self.addEventListener('activate', event => {
+//   event.waitUntil(
+//     caches.keys()
+//       .then(cacheNames => (
+//         Promise.all(
+//           cacheNames.filter(cacheName => {
+//             return cacheName.startsWith('mws-') && !cacheUrls.includes(cacheName);
+//         }).map(cacheName => (
+//             caches['delete'](cacheName)
+//         )))
+//       ))
+//   )
+// });
+
+
 self.addEventListener('fetch', event => {
+  const requestUrl = new URL(event.request.url);
+
+  if (requestUrl.origin === location.origin) {
+    // if (requestUrl.pathname === '/') {
+    //   event.respondWith(caches.match('/skeleton'));
+    //   return;
+    // }
+    if (requestUrl.pathname.startsWith('/restaurant')) {
+      event.respondWith(serveRestaurantHtml(event.request));
+      return;
+    }
+  }
+
   event.respondWith(
     caches.match(event.request).then(response => (
       response || fetch(event.request)
@@ -30,15 +58,18 @@ self.addEventListener('fetch', event => {
 });
 
 
-// self.addEventListener('activate', event => {
-//   event.waitUntil(
-//     caches.keys()
-//       .then(cacheNames => (
-//         Promise.all(cacheNames.filter(cacheName => {
-//             return cacheName.startsWith('mws-') && !cacheUrls.includes(cacheName);
-//         }).map(cacheName => (
-//             caches['delete'](cacheName)
-//         )))
-//       ))
-//   )
-// });
+function serveRestaurantHtml(request) {
+  var storageUrl = request.url.replace(/-\d+px\.jpg$/, '');
+  console.log(request)
+
+  return caches.open(cacheUrls).then(cache => {
+    return cache.match(storageUrl).then(response => {
+      if (response) return response;
+
+      return fetch(request).then(networkResponse => {
+        cache.put(storageUrl, networkResponse.clone());
+        return networkResponse;
+      });
+    });
+  });
+}
