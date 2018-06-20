@@ -1,4 +1,4 @@
-const STATIC_CACHE = 'mws-static-v12';
+const STATIC_CACHE = 'mws-static-v3';
 const cacheUrls =[
   '/',
   '/index.html',
@@ -9,8 +9,6 @@ const cacheUrls =[
   '/img/',
   '/css/styles.css'
 ];
-
-
 
 self.addEventListener('install', event => {
   event.waitUntil(
@@ -73,3 +71,10 @@ function serveRestaurantHtml(request) {
     });
   });
 }
+
+self.addEventListener('message', event => {
+  if (event.data.update) {
+    self.skipWaiting();
+  }
+});
+

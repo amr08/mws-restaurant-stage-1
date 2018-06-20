@@ -456,6 +456,28 @@ nav h1 a {
   }
 }
 
+/*TOAST*/
+
+.toast {
+  max-width: 300px;
+  padding: 5px;
+  font-size: 20px;
+  color: white;
+  background-color: rgba(72, 209, 204, .9);
+  z-index: 99;
+  position: fixed;
+  top: 10px;
+  left: 0;
+  text-align: center;
+}
+
+.button-toast {
+  padding: 5px;
+  margin: 5px;
+  border-radius: 5px;
+  background-color: #FA8072;
+}
+
 @media screen and (min-width: 800px){
   nav h1 a {
     font-size: 30px;
