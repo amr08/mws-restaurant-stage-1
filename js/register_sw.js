@@ -29,11 +29,15 @@ const addToast = (installingWorker) => {
   toastDiv.classList.add("toast");
   toastDiv.innerHTML = "Content update available";
   toastDiv.setAttribute("id", "toast");
+  toastDiv.setAttribute("aria-label", "service-worker-update")
+
 
   const acceptButton = document.createElement("button");
   const dismissButton = document.createElement("button");
 
   acceptButton.classList.add("button-toast");
+  acceptButton.focus();
+  acceptButton.setAttribute("tabindex", "0");
   acceptButton.innerHTML = "Accept";
   acceptButton.onclick = () => {
     installingWorker.postMessage({update: true});
@@ -41,6 +45,7 @@ const addToast = (installingWorker) => {
 
   dismissButton.classList.add("button-toast");
   dismissButton.innerHTML = "Dismiss";
+  dismissButton.setAttribute("tabindex", "1");
   dismissButton.onclick = () => {
     const getToastDiv = document.getElementById("toast");
     getToastDiv.parentNode.removeChild(getToastDiv);
@@ -49,7 +54,5 @@ const addToast = (installingWorker) => {
   toastDiv.appendChild(acceptButton);
   toastDiv.appendChild(dismissButton);
 
-
   body.appendChild(toastDiv);
-
 }

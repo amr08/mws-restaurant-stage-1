@@ -5,31 +5,24 @@
       <meta name= viewport content= width=device-width initial-scale=1>
     <!-- Normalize.css for better cross-browser consistency -->
     <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
-    <!-- Main CSS file -->
     <link rel="stylesheet" href="css/styles.css" type="text/css">
     <title>Restaurant Info</title>
   </head>
 
   <body class="inside">
-    <!-- Beginning header -->
     <header>
-      <!-- Beginning nav -->
       <nav>
         <h1><a href="/">Restaurant Reviews</a></h1>
       </nav>
-      <!-- Beginning breadcrumb -->
-      <ul id="breadcrumb" >
+      <ul id="breadcrumb" aria-label="breadcrumb">
         <li><a href="/">Home</a></li>
       </ul>
-      <!-- End breadcrumb -->
-      <!-- End nav -->
     </header>
-    <!-- End header -->
 
-    <!-- Beginning main -->
     <main id="maincontent">
       <!-- Beginning map -->
-      <section id="map-container">
+      <label id="image-of-google-maps" class="off-screen">Google Maps</label>
+      <section id="map-container" role="application" aria-labelledby="image-of-google-maps">
         <div id="map"></div>
       </section>
       <!-- End map -->
