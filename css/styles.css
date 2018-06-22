@@ -132,6 +132,14 @@ nav h1 a {
   transition: all 1s;
 }
 
+#error {
+  width: 100%;
+  position: absolute;
+  top: 250px;
+  text-align: center;
+  color: black;
+}
+
 
 #breadcrumb {
   padding: 10px 40px 16px;
