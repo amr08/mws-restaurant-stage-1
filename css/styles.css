@@ -255,7 +255,7 @@ nav h1 a {
 }
 
 
-#restaurants-list li h1 {
+#restaurants-list li h2 {
   color: black;
   font-family: Arial,sans-serif;
   font-size: 14pt;
@@ -413,12 +413,11 @@ nav h1 a {
   padding: 5px;
 }
 
-#reviews-list li p:first-of-type {
+#reviews-list li h3 {
  background-color: #464646;
  color: white;
  padding: 15px;
  margin: 0;
-
 }
 
 
@@ -504,13 +503,9 @@ nav h1 a {
     order: 0;
   }
 
-  #reviews-list li p {
+  #reviews-list li p, h3 {
     font-size: 20px;
   }
-
-
-
-
 }
 
 
@@ -536,8 +531,4 @@ nav h1 a {
     font-size: 24px;
   }
 
-  #reviews-container {
-    /*padding-right: 5px;
-    padding-left: 10px;*/
-  }
 }
