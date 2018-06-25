@@ -1,4 +1,5 @@
-const STATIC_CACHE = 'mws-static-v3';
+const STATIC_CACHE = 'mws-static-v4';
+const cacheImgs = 'restaurant-imgs';
 const homeCacheUrls = [
   '/',
   '/index.html',
@@ -51,6 +52,11 @@ self.addEventListener('fetch', event => {
       event.respondWith(serveRestaurantHtml(event.request));
       return;
     }
+
+    if (requestUrl.pathname.startsWith('/img/')) {
+      event.respondWith(servePhotos(event.request));
+      return;
+    }
   }
 
   event.respondWith(
@@ -78,6 +84,28 @@ function serveRestaurantHtml(request) {
     });
   });
 }
+
+function servePhotos(request) {
+  const storageUrl = request.url.replace(/-\d+px\.jpg$/, '');
+
+  return caches.open(cacheImgs).then(cache => {
+    return cache.match(storageUrl).then(response => {
+      //If an image doesn't show up, put in placeholder
+      return response.status === 404 
+        ? fetch(`img/10.jpg`)
+        : response;
+     
+
+      return fetch(request).then(networkResponse => {
+        cache.put(storageUrl, networkResponse.clone());
+        return networkResponse;
+      })
+    }).catch(error => {
+      console.log("Error in servePhotos", error)
+    })
+  });
+}
+
 
 self.addEventListener('message', event => {
   if (event.data.update) {
